@@ -19,16 +19,6 @@ function getComputerChoice()
     return strCPUGuess;
 }
 
-let cpuGuess = getComputerChoice(); // gets number between 0 and 2, inclusive
-
-// console.log(cpuGuess);
-
-let userGuess = prompt("Please pick Rock, Paper, or Scissors: ");
-const cleanUserGuess = userGuess.charAt(0).toUpperCase() + userGuess.slice(1);
-
-console.log(cleanUserGuess);
-
-
 function playOneGame(playerSelection, computerSelection)
 {
     if (playerSelection === "Rock")
@@ -50,5 +40,12 @@ function playOneGame(playerSelection, computerSelection)
         }
     }
 }
+
+let cpuGuess = getComputerChoice(); // gets number between 0 and 2, inclusive
+
+// console.log(cpuGuess);
+
+let userGuess = prompt("Please pick Rock, Paper, or Scissors: ");
+const cleanUserGuess = userGuess.charAt(0).toUpperCase() + userGuess.slice(1);
 
 playOneGame(userGuess, cpuGuess);
