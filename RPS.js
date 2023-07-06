@@ -25,11 +25,11 @@ function playOneGame(playerSelection, computerSelection)
     {
         if(computerSelection === "Paper") // lose to cpu
         {
-            console.log("Paper beats Rock! You Lose!");
+            return "Paper beats Rock! You Lose!";
         }
         else if(computerSelection === "Scissors") // beat cpu
         {
-            console.log("Congratulations! Rock beats Scissors! You Win!");
+            return "Congratulations! Rock beats Scissors! You Win!";
         }
         else // tie, go again
         {
@@ -44,11 +44,11 @@ function playOneGame(playerSelection, computerSelection)
     {
         if(computerSelection === "Scissors") // lose to cpu
         {
-            console.log("Scissors beats Paper! You Lose!");
+            return "Scissors beats Paper! You Lose!";
         }
         else if(computerSelection === "Rock") // beat cpu
         {
-            console.log("Congratulations! Paper beats Rock! You Win!");
+            return "Congratulations! Paper beats Rock! You Win!";
         }
         else // tie, go again
         {
@@ -63,11 +63,11 @@ function playOneGame(playerSelection, computerSelection)
     {
         if(computerSelection === "Rock") // lose to cpu
         {
-            console.log("Rock beats Scissors! You Lose!");
+            return "Rock beats Scissors! You Lose!";
         }
         else if(computerSelection === "Paper") // beat cpu
         {
-            console.log("Congratulations! Scissors beats Paper! You Win!");
+            return "Congratulations! Scissors beats Paper! You Win!";
         }
         else // tie, go again
         {
