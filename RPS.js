@@ -19,17 +19,19 @@ function getComputerChoice()
     return strCPUGuess;
 }
 
+let outcome;
 function playOneGame(playerSelection, computerSelection)
 {
+    
     if (playerSelection === "Rock")
     {
         if(computerSelection === "Paper") // lose to cpu
         {
-            return "Paper beats Rock! You Lose!";
+            outcome = "CPU Win";
         }
         else if(computerSelection === "Scissors") // beat cpu
         {
-            return "Congratulations! Rock beats Scissors! You Win!";
+            outcome = "User Win";
         }
         else // tie, go again
         {
@@ -38,17 +40,18 @@ function playOneGame(playerSelection, computerSelection)
             cpuGuess = getComputerChoice();
             cleanUserGuess = userGuess.charAt(0).toUpperCase() + userGuess.slice(1).toLowerCase();
             playOneGame(cleanUserGuess, cpuGuess);
+            return outcome;
         }
     }
     else if (playerSelection === "Paper") // user picks paper
     {
         if(computerSelection === "Scissors") // lose to cpu
         {
-            return "Scissors beats Paper! You Lose!";
+            outcome = "CPU Win";
         }
         else if(computerSelection === "Rock") // beat cpu
         {
-            return "Congratulations! Paper beats Rock! You Win!";
+            outcome = "User Win";
         }
         else // tie, go again
         {
@@ -57,17 +60,18 @@ function playOneGame(playerSelection, computerSelection)
             cleanUserGuess = userGuess.charAt(0).toUpperCase() + userGuess.slice(1).toLowerCase();
             cpuGuess = getComputerChoice();
             playOneGame(cleanUserGuess, cpuGuess);
+            return outcome;
         }
     }
     else if (playerSelection === "Scissors") // user picks scissors
     {
         if(computerSelection === "Rock") // lose to cpu
         {
-            return "Rock beats Scissors! You Lose!";
+            outcome = "CPU Win";
         }
         else if(computerSelection === "Paper") // beat cpu
         {
-            return "Congratulations! Scissors beats Paper! You Win!";
+            outcome = "User Win";
         }
         else // tie, go again
         {
@@ -76,6 +80,7 @@ function playOneGame(playerSelection, computerSelection)
             cleanUserGuess = userGuess.charAt(0).toUpperCase() + userGuess.slice(1).toLowerCase();
             cpuGuess = getComputerChoice();
             playOneGame(cleanUserGuess, cpuGuess);
+            return outcome;
         }
     }
     else
@@ -84,7 +89,10 @@ function playOneGame(playerSelection, computerSelection)
         userGuess = prompt("Please pick Rock, Paper, or Scissors: ");
         cleanUserGuess = userGuess.charAt(0).toUpperCase() + userGuess.slice(1).toLowerCase();
         playOneGame(cleanUserGuess, cpuGuess);
+        return outcome;
     }
+
+    return outcome;
 }
 
 let cpuGuess = getComputerChoice(); // gets number between 0 and 2, inclusive
@@ -94,4 +102,5 @@ let cpuGuess = getComputerChoice(); // gets number between 0 and 2, inclusive
 let userGuess = prompt("Please pick Rock, Paper, or Scissors: ");
 let cleanUserGuess = userGuess.charAt(0).toUpperCase() + userGuess.slice(1).toLowerCase();
 
-playOneGame(cleanUserGuess, cpuGuess);
+let gameOutcome = playOneGame(cleanUserGuess, cpuGuess);
+console.log(gameOutcome);
