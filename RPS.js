@@ -67,7 +67,7 @@ function playOneGame(playerSelection, computerSelection)
         else // tie, go again
         {
             console.log("It's a tie, you both picked Rock. Pick again")
-            userGuess = prompt("Please pick Rock, Paper, or Scissors: ");
+            userGuess = prompt("Please pick Rock, Paper, or Scissors: \n (HINT: Open the console by pressing CTRL + SHIFT + J)");
             cpuGuess = getComputerChoice();
             cleanUserGuess = userGuess.charAt(0).toUpperCase() + userGuess.slice(1).toLowerCase();
             playOneGame(cleanUserGuess, cpuGuess);
@@ -87,7 +87,7 @@ function playOneGame(playerSelection, computerSelection)
         else // tie, go again
         {
             console.log("It's a tie, you both picked Paper. Pick again")
-            userGuess = prompt("Please pick Rock, Paper, or Scissors: ");
+            userGuess = prompt("Please pick Rock, Paper, or Scissors: \n (HINT: Open the console by pressing CTRL + SHIFT + J)");
             cleanUserGuess = userGuess.charAt(0).toUpperCase() + userGuess.slice(1).toLowerCase();
             cpuGuess = getComputerChoice();
             playOneGame(cleanUserGuess, cpuGuess);
@@ -107,7 +107,7 @@ function playOneGame(playerSelection, computerSelection)
         else // tie, go again
         {
             console.log("It's a tie, you both picked Scissors. Pick again")
-            userGuess = prompt("Please pick Rock, Paper, or Scissors: ");
+            userGuess = prompt("Please pick Rock, Paper, or Scissors: \n (HINT: Open the console by pressing CTRL + SHIFT + J)");
             cleanUserGuess = userGuess.charAt(0).toUpperCase() + userGuess.slice(1).toLowerCase();
             cpuGuess = getComputerChoice();
             playOneGame(cleanUserGuess, cpuGuess);
@@ -117,7 +117,7 @@ function playOneGame(playerSelection, computerSelection)
     else
     {
         console.log("You chose something invalid!! Try again");
-        userGuess = prompt("Please pick Rock, Paper, or Scissors: ");
+        userGuess = prompt("Please pick Rock, Paper, or Scissors: \n (HINT: Open the console by pressing CTRL + SHIFT + J)");
         cleanUserGuess = userGuess.charAt(0).toUpperCase() + userGuess.slice(1).toLowerCase();
         playOneGame(cleanUserGuess, cpuGuess);
         return outcome;
@@ -133,7 +133,7 @@ function game()
     {
         cpuGuess = getComputerChoice(); // gets number between 0 and 2, inclusive
 
-        userGuess = prompt("Please pick Rock, Paper, or Scissors: "); // ask user for their input
+        userGuess = prompt("Please pick Rock, Paper, or Scissors: \n (HINT: Open the console by pressing CTRL + SHIFT + J)"); // ask user for their input
         cleanUserGuess = userGuess.charAt(0).toUpperCase() + userGuess.slice(1).toLowerCase();
 
         gameOutcome = playOneGame(cleanUserGuess, cpuGuess); 
