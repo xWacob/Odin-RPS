@@ -2,33 +2,30 @@
 
 let userGuess;
 let cpuGuess;
-let cleanUserGuess;
-let outcome;
+let userScore = 0;
+let cpuScore = 0;
+let roundPlaying = true;
+const rockBtn = document.querySelector("#rock");
+const paperBtn = document.querySelector("#paper");
+const scissorsBtn = document.querySelector("#scissors");
+const buttonCntr = document.querySelector(".game-area");
+const scoreBoard = document.createElement("div");
+const playerWinnerPerRound = document.createElement("div");
+const body = document.querySelector("body");
 
 // ********************************************************
 
-let userScore = 0;
-let cpuScore = 0;
+
+body.style.display = "flex";
+body.style.justifyContent = "space-evenly";
+body.style.alignContent = "center";
+body.style.flexDirection = "column";
 
 let gameCheck = game();
 
-if (gameCheck === 0)
-{
-    if(userScore > cpuScore)
-    {
-        console.log(`You beat the CPU by a score of ${userScore} to ${cpuScore}, good guessing!`);
-    }
-    else
-    {
-        console.log(`The CPU beat you by a score of ${cpuScore} to ${userScore}, better luck next time!`);
-    }
-}
-else
-{
-    console.log("ERROR OCCURRED");
-}
 
-
+// *******************************************************************
+// ******************* FUNCTIONS *************************************
 function getComputerChoice()
 {
     let cpuChoice = Math.floor(Math.random() * 100);
@@ -53,74 +50,56 @@ function getComputerChoice()
 
 function playOneGame(playerSelection, computerSelection)
 {
-    
+    let outcome;   
     if (playerSelection === "Rock")
     {
         if(computerSelection === "Paper") // lose to cpu
         {
-            outcome = "CPU Win";
+            outcome = "CPU Win, plus 1!";
         }
         else if(computerSelection === "Scissors") // beat cpu
         {
-            outcome = "User Win";
+            outcome = "User Win, plus 1!";
         }
         else // tie, go again
         {
-            console.log("It's a tie, you both picked Rock. Pick again")
-            userGuess = prompt("Please pick Rock, Paper, or Scissors: \n (HINT: Open the console by pressing CTRL + SHIFT + J)");
-            cpuGuess = getComputerChoice();
-            cleanUserGuess = userGuess.charAt(0).toUpperCase() + userGuess.slice(1).toLowerCase();
-            playOneGame(cleanUserGuess, cpuGuess);
-            return outcome;
+            outcome = "You tied, no points!";
         }
     }
     else if (playerSelection === "Paper") // user picks paper
     {
         if(computerSelection === "Scissors") // lose to cpu
         {
-            outcome = "CPU Win";
+            outcome = "CPU Win, plus 1!";
         }
         else if(computerSelection === "Rock") // beat cpu
         {
-            outcome = "User Win";
+            outcome = "User Win, plus 1!";
         }
         else // tie, go again
         {
-            console.log("It's a tie, you both picked Paper. Pick again")
-            userGuess = prompt("Please pick Rock, Paper, or Scissors: \n (HINT: Open the console by pressing CTRL + SHIFT + J)");
-            cleanUserGuess = userGuess.charAt(0).toUpperCase() + userGuess.slice(1).toLowerCase();
-            cpuGuess = getComputerChoice();
-            playOneGame(cleanUserGuess, cpuGuess);
-            return outcome;
+            outcome = "You tied, no points!";
         }
     }
     else if (playerSelection === "Scissors") // user picks scissors
     {
         if(computerSelection === "Rock") // lose to cpu
         {
-            outcome = "CPU Win";
+            outcome = "CPU Win, plus 1!";
         }
         else if(computerSelection === "Paper") // beat cpu
         {
-            outcome = "User Win";
+            outcome = "User Win, plus 1!";
         }
         else // tie, go again
         {
-            console.log("It's a tie, you both picked Scissors. Pick again")
-            userGuess = prompt("Please pick Rock, Paper, or Scissors: \n (HINT: Open the console by pressing CTRL + SHIFT + J)");
-            cleanUserGuess = userGuess.charAt(0).toUpperCase() + userGuess.slice(1).toLowerCase();
-            cpuGuess = getComputerChoice();
-            playOneGame(cleanUserGuess, cpuGuess);
-            return outcome;
+            outcome = "You tied, no points!";
         }
     }
     else
     {
-        console.log("You chose something invalid!! Try again");
-        userGuess = prompt("Please pick Rock, Paper, or Scissors: \n (HINT: Open the console by pressing CTRL + SHIFT + J)");
-        cleanUserGuess = userGuess.charAt(0).toUpperCase() + userGuess.slice(1).toLowerCase();
-        playOneGame(cleanUserGuess, cpuGuess);
-        return outcome;
+        console.log("ERROR");
+        return -1;
     }
 
     return outcome;
@@ -128,31 +107,76 @@ function playOneGame(playerSelection, computerSelection)
 
 function game()
 {
-    let gameOutcome;
-    for(i = 0; i < 5; i++)
-    {
-        cpuGuess = getComputerChoice(); // gets number between 0 and 2, inclusive
+    let gameWinner;
 
-        userGuess = prompt("Please pick Rock, Paper, or Scissors: \n (HINT: Open the console by pressing CTRL + SHIFT + J)"); // ask user for their input
-        cleanUserGuess = userGuess.charAt(0).toUpperCase() + userGuess.slice(1).toLowerCase();
+    rockBtn.addEventListener('click', () => {
+        userGuess = "Rock";
+        cpuGuess = getComputerChoice();
+        gameWinner = playOneGame(userGuess, cpuGuess);
+        addToScore(gameWinner);
+    });
 
-        gameOutcome = playOneGame(cleanUserGuess, cpuGuess); 
+    paperBtn.addEventListener('click', () => {
+        userGuess = "Paper";
+        cpuGuess = getComputerChoice();
+        gameWinner = playOneGame(userGuess, cpuGuess);
+        addToScore(gameWinner);
+    });
 
-        if(gameOutcome === "CPU Win")
-        {
-            cpuScore++;
-        }
-        else if (gameOutcome === "User Win")
-        {
-            userScore++;
-        }
-        else
-        {
-            console.log("Invalid event occurred, exiting...");
-            return null;
-        }
-    }
+    scissorsBtn.addEventListener('click', () => {
+        userGuess = "Scissors";
+        cpuGuess = getComputerChoice();
+        gameWinner = playOneGame(userGuess, cpuGuess);
+        addToScore(gameWinner);
+    });      
 
     // game runs correctly
     return 0;
+}
+
+function addToScore(winner)
+{
+    if(winner === "User Win, plus 1!")
+    {
+        userScore++;
+    }
+    else if(winner === "CPU Win, plus 1!")
+    {
+        cpuScore++;
+    }
+
+    updateScoreboard(winner);
+}
+
+function updateScoreboard(roundWinner)
+{
+    scoreBoard.textContent = `Score is User: ${userScore} to CPU: ${cpuScore}`;
+    scoreBoard.style.textAlign = "center";
+    scoreBoard.style.margin = "30px"
+    playerWinnerPerRound.textContent = `${roundWinner}`;
+    playerWinnerPerRound.style.textAlign = "center";
+    playerWinnerPerRound.style.margin = "30px"
+    buttonCntr.appendChild(scoreBoard);
+    buttonCntr.appendChild(playerWinnerPerRound);
+    checkWinner();
+} 
+
+function checkWinner()
+{
+    if(userScore === 5)
+    {
+        scoreBoard.textContent = "YOU WIN, CONGRAGULATIONS";
+        rockBtn.remove();
+        paperBtn.remove();
+        scissorsBtn.remove();
+        playerWinnerPerRound.remove();
+    }
+    else if(cpuScore === 5)
+    {
+        scoreBoard.textContent = "YOU LOSE, BETTER LUCK NEXT TIME";
+        rockBtn.remove();
+        paperBtn.remove();
+        scissorsBtn.remove();
+        playerWinnerPerRound.remove();
+    }
 }
