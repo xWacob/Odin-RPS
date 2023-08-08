@@ -1,2 +1,4 @@
 # Odin-RPS
 This project is the first javascript code written from scratch. I have written in languages with this type of logic before many times so I am sure it will not be too hard for me to do. But, I must give it my best attempt as it is still new to me in general.
+
+UPDATE: I have now completed the main ideas of this project and have a much better understanding of what to do in projects like these but I am far from an expert, and that is ok! I am still learning the git system and the proper time to commit and what to commit, which I am sure I will improve upon as I do more projects. This was far from perfect but it is something I did all on my own which I can be proud of.
